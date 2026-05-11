@@ -1,0 +1,23 @@
+# .NET
+bin/
+obj/
+publish/
+*.user
+*.suo
+*.cache
+*.userprefs
+*.DotSettings.user
+
+# VS Code
+.vscode/
+
+# Rider / VS
+.idea/
+*.sln.DotSettings
+
+# Claude
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,72 @@
+<Window x:Class="KeyShow.StatsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Stats"
+       
+        Width="420" Height="520"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="ToolWindow">
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,12">
+            <TextBlock x:Name="TotalLabel" FontSize="16" FontWeight="Bold" Margin="0,0,0,4"/>
+            <TextBlock x:Name="UniqueLabel" FontSize="13" Foreground="#888"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="0,0,0,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel x:Name="HeatLegend" Orientation="Horizontal" Margin="0,0,0,6">
+                <TextBlock x:Name="HeatLabel" VerticalAlignment="Center" FontSize="12" Margin="0,0,6,0"/>
+                <Border Width="16" Height="16" CornerRadius="3"
+                        Background="#FFD700" Margin="0,0,4,0"/>
+                <TextBlock x:Name="GoldLabel" FontSize="11" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <Border Width="16" Height="16" CornerRadius="3"
+                        Background="#4FC3F7" Margin="0,0,4,0"/>
+                <TextBlock x:Name="BlueLabel" FontSize="11" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <Border Width="16" Height="16" CornerRadius="3"
+                        Background="#555" Margin="0,0,4,0"/>
+                <TextBlock x:Name="NoneLabel" FontSize="11" VerticalAlignment="Center"/>
+            </StackPanel>
+            <CheckBox x:Name="GlowToggle" Grid.Row="1"
+                      IsChecked="True" Checked="GlowToggle_Changed"
+                      Unchecked="GlowToggle_Changed" FontSize="13"/>
+        </Grid>
+
+        <ListView x:Name="StatsList" Grid.Row="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn x:Name="ColRank" Width="50" DisplayMemberBinding="{Binding Rank}"/>
+                    <GridViewColumn x:Name="ColKey" Width="120" DisplayMemberBinding="{Binding Key}"/>
+                    <GridViewColumn x:Name="ColCount" Width="80" DisplayMemberBinding="{Binding Count}"/>
+                    <GridViewColumn x:Name="ColHeat" Width="120">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border CornerRadius="10" Height="14"
+                                        Background="{Binding HeatBrush}"
+                                        Width="{Binding HeatWidth}" HorizontalAlignment="Left"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+            <Button x:Name="RefreshBtn" Width="80" Height="32" Margin="0,0,10,0"
+                    Click="Refresh_Click"/>
+            <Button x:Name="CloseBtn" Width="80" Height="32"
+                    Click="Close_Click" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

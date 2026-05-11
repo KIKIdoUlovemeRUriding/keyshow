@@ -16,11 +16,7 @@ A floating on-screen keypress visualizer for Windows — see every keystroke in 
 
 ## Screenshot
 
-```
-┌─────────────────────────────────────────────┐
-│  [Ctrl] [C] [Enter] [A × 12] [H] [E] [L]  │
-└─────────────────────────────────────────────┘
-```
+![demo](./Images/demo.gif)
 
 ## Download
 

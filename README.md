@@ -1,22 +1,22 @@
 # KeyShow
 
-A floating on-screen keypress visualizer for Windows, built with .NET 9 / WPF.
+A floating on-screen keypress visualizer for Windows. Displays every keystroke in real time — perfect for streaming, screen recording, presentations, or just showing off your keyboard skills.
 
-屏幕浮层按键显示工具，录制/直播/演示时实时展示键盘输入。
+基于 .NET 9 / WPF 的 Windows 屏幕浮层按键可视化工具，录制、直播、演示时实时展示键盘输入。
 
-## Features / 功能
+## Features · 功能
 
-- **全局按键捕获** — 监听所有按键输入，无需窗口聚焦
-- **透明浮层显示** — 半透明置顶窗口，鼠标穿透不干扰操作
-- **连击合并** — 长按/快速连击自动合并为 `Key × N` 显示
-- **热键统计** — 统计最近 2 小时按键频次，热度排名
-- **流光特效** — 高频按键自动触发金色/蓝色环绕流光边框
-- **丰富自定义** — 卡片颜色、字号、字体、大小、位置、语言均可配置
-- **多语言** — 内置中文 / English 双语言支持
+- **Global key capture** · 全局按键捕获 — Captures all keystrokes system-wide via `WH_KEYBOARD_LL` hook, no window focus required
+- **Floating overlay** · 透明浮层 — Semi-transparent, always-on-top window with click-through, never gets in your way
+- **Combo detection** · 连击合并 — Rapid repeated presses of the same key auto-merge into `Key × N` display
+- **Key statistics** · 热键统计 — Tracks press frequency over the last 2 hours with a ranked stats panel
+- **Glow effects** · 流光特效 — High-frequency keys trigger animated gold/blue border glow that sweeps around the card
+- **Extensive customization** · 丰富自定义 — Card colors, font family/size/weight, card dimensions, screen position, language
+- **i18n** · 多语言 — Built-in Chinese / English support
 
-## Screenshot / 截图
+## Screenshot · 截图
 
-键盘输入时，屏幕右下角浮层实时显示按键：
+Keys appear as floating cards at the bottom-right corner of the screen:
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -24,35 +24,37 @@ A floating on-screen keypress visualizer for Windows, built with .NET 9 / WPF.
 └─────────────────────────────────────────────┘
 ```
 
-高频按键带有金色/蓝色环绕流光特效。
+Hot keys are highlighted with animated gold or blue glow effects.
 
-## Download / 下载
+## Download · 下载
 
-| 版本 | 大小 | 说明 |
-|------|------|------|
-| `KeyShow-self-contained.exe` | ~71 MB | 免安装 .NET，即开即用 |
-| `framework-dependent/KeyShow.exe` | ~290 KB | 需系统安装 [.NET 9.0 Runtime](https://dotnet.microsoft.com/download/dotnet/9.0) |
+| Version | Size | Notes |
+|---------|------|-------|
+| `KeyShow-self-contained.exe` | ~71 MB | Standalone — no .NET install needed |
+| `framework-dependent/KeyShow.exe` | ~290 KB | Requires [.NET 9.0 Runtime](https://dotnet.microsoft.com/download/dotnet/9.0) |
 
-## Build / 构建
+Download from [Releases](https://github.com/KIKIdoUlovemeRUriding/keyshow/releases).
+
+## Build · 构建
 
 ```bash
-git clone <repo-url>
-cd keyborad-show
+git clone git@github.com:KIKIdoUlovemeRUriding/keyshow.git
+cd keyshow
 dotnet run --project KeyShow.csproj
 
-# 发布单文件
+# Publish single-file
 dotnet publish KeyShow.csproj -c Release -r win-x64 \
   -p:PublishSingleFile=true --self-contained true -o publish
 ```
 
-## Tech Stack / 技术栈
+## Tech Stack · 技术栈
 
 - .NET 9.0 / WPF + WinForms
-- Win32 `SetWindowsHookEx(WH_KEYBOARD_LL)` 全局键盘钩子
-- `StrokeDashOffset` 动画实现边框流光
-- HSV 色盘取色器
-- JSON 配置持久化
+- `SetWindowsHookEx(WH_KEYBOARD_LL)` for global keyboard hooking
+- `StrokeDashOffset` animation for border glow effects
+- HSV color picker with gradient canvas
+- JSON-based settings persistence (`%LocalAppData%/KeyShow/`)
 
-## License / 许可
+## License · 许可
 
 MIT

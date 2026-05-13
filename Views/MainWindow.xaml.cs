@@ -184,8 +184,8 @@ public partial class MainWindow : Window
             var statCount = KeyStatsTracker.GetCount(text);
 
             string glow;
-            if (statCount >= 10000) glow = "#CCFFD700";
-            else if (statCount >= 2000) glow = "#CC4FC3F7";
+            if (statCount >= 500) glow = "#CCFFD700";
+            else if (statCount >= 200) glow = "#CC4FC3F7";
             else glow = "Transparent";
 
             // 场景 A：上一个是已合并条目（RepeatCount≥5），且在 800ms 内 → 连击累加

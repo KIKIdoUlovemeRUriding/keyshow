@@ -280,43 +280,25 @@ public partial class SettingsWindow : Window
         Close();
     }
 
-    private void ApplyAutoStart()
+    private static void ApplyAutoStart()
     {
-        var startupDir = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
-        var shortcut = Path.Combine(startupDir, "KeyShow.lnk");
+        const string runKey = @"Software\Microsoft\Windows\CurrentVersion\Run";
+        var exe = Environment.ProcessPath ?? "";
 
         try
         {
-            if (_settings.AutoStart)
+            using var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(runKey, writable: true);
+            if (key == null) return;
+
+            if (AppSettings.Instance.AutoStart && !string.IsNullOrEmpty(exe))
             {
-                var exe = Environment.ProcessPath ?? "";
-                if (!string.IsNullOrEmpty(exe) && !File.Exists(shortcut))
-                    CreateShortcut(exe, shortcut);
+                key.SetValue("KeyShow", $"\"{exe}\"");
             }
             else
             {
-                if (File.Exists(shortcut))
-                    File.Delete(shortcut);
+                key.DeleteValue("KeyShow", throwOnMissingValue: false);
             }
         }
         catch { }
-    }
-
-    private static void CreateShortcut(string targetPath, string shortcutPath)
-    {
-        var script = $@"
-            $WshShell = New-Object -ComObject WScript.Shell
-            $Shortcut = $WshShell.CreateShortcut('{shortcutPath}')
-            $Shortcut.TargetPath = '{targetPath}'
-            $Shortcut.Save()
-        ";
-        var psi = new System.Diagnostics.ProcessStartInfo("powershell.exe",
-            $"-NoProfile -NonInteractive -Command \"{script.Replace("\n", " ").Replace("\r", "")}\"")
-        {
-            CreateNoWindow = true,
-            UseShellExecute = false
-        };
-        var p = System.Diagnostics.Process.Start(psi);
-        p?.WaitForExit(3000);
     }
 }

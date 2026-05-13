@@ -21,9 +21,9 @@ public partial class StatsWindow : Window
     {
         Title = L.StatsTitle;
         HeatLabel.Text = L.HeatLegend;
-        GoldLabel.Text = L.IsEn ? "≥10000" : "≥10000次";
-        BlueLabel.Text = L.IsEn ? "≥2000" : "≥2000次";
-        NoneLabel.Text = L.IsEn ? "<2000" : "<2000次";
+        GoldLabel.Text = L.IsEn ? "≥500" : "≥500次";
+        BlueLabel.Text = L.IsEn ? "≥200" : "≥200次";
+        NoneLabel.Text = L.IsEn ? "<200" : "<200次";
         GlowToggle.Content = L.GlowToggle;
         RefreshBtn.Content = L.Refresh;
         CloseBtn.Content = L.Close;
